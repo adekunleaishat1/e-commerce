@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../fontawesome-free-6.2.1-web/css/all.css">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #con {
+            background-color:rgb(238, 165, 92);
+            width: 500px;
+            height:auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            padding-inline: 10px;
+        }
+
+        .contain1 p {
+            font-size: 20px;
+            color: black;
+        }
+
+        .contain1 h2 {
+            display: inline-block;
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        .contain1 h1 {
+            display: inline-block;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .in {
+            width: 200px;
+            height: 150px;
+        }
+
+        .contain1 {
+            width: 500px;
+            height: 350px;
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            position: relative;
+            margin: auto;
+            text-align: left;
+            background-color:white;
+            margin-bottom: 10px;
+            margin-top: 10px;
+            box-shadow: 2px 2px 2px 2px rgb(211, 208, 208);
+            border-radius: 10px;
+            padding: 10px 15px;
+        }
+
+        #min {
+            width: 50px;
+            height: 40px;
+            background-color: rgb(224, 126, 27);
+            border: 1px solid rgb(224, 126, 27);
+            border-radius: 10px;
+            color: white;
+            font-size: 20px;
+        }
+
+        .di {
+            width: 200px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #bin {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 200px;
+            border: none;
+        }
+
+        #bin:focus-within {
+            background-color: rgb(252, 219, 185);
+        }
+
+        #bin i {
+            color: rgb(224, 126, 27);
+        }
+        /* #inercon{
+         width: 700px;
+         height: 100vh;
+         background-color: rgb(236, 228, 228);
+        } */
+        .bod{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: start;
+            background-color: rgb(241, 241, 242);
+        }
+        .sub{
+            width: 300px;
+            height: 200px;
+            text-align: center;
+            background-color: white;
+            padding: 10px;
+            box-shadow: 2px 2px 2px 2px rgb(236, 228, 228);
+            margin-left: 10px;
+            position: sticky;
+            top: 0;
+        }
+        .sub h1{
+            font-size: 25px;
+            font-weight: 700;
+        }
+        #out{
+          width: 250px;
+          height: 40px;
+          background-color: rgb(224, 126, 27);
+          color: white;
+          font-size: 18px;
+          border: 1px solid rgb(224, 126, 27);
+          border-radius: 5px;
+          font-family: Arial, Helvetica, sans-serif;
+          margin-top: 10px;
+        }
+        .sub-total{
+            width: 250px;
+            height: 50px;
+            padding-inline: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid gray;
+            margin: auto;
+        }
+        .sub-total h1{
+            font-size: 18px;
+            font-weight: 500;
+        }
+        .side{
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="bod">
+        <div id="con"></div>
+            <div class="sub">
+                <h1>cart summary</h1>
+                <div class="sub-total">
+                   <h1>subtotal:</h1> 
+                   <h2 id="total"></h2>
+                </div>
+                <button onclick="makePayment('tp')" id="out">check out</button>
+
+            </div>
+    </main>
+</body>
+
+</html>
+<script src="cart.js"></script>
+<script src="https://checkout.flutterwave.com/v3.js"></script>

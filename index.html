@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../bootstrap-5.3.0-alpha1-dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../fontawesome-free-6.2.1-web/css/all.css">
+  <link rel="stylesheet" href="index.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <main>
+    <div class="top-nav">
+      <div class="iner">
+        <img class="star" src="https://logos-world.net/wp-content/uploads/2022/12/Jumia-Logo.png" alt="">
+      </div>
+      <div class="iner2">
+        <i class="fa-sharp fa fa-magnifying-glass"></i>
+        <input type="text" placeholder="search product, Brands and categories">
+      </div>
+      <div>
+        <button class="iner3">Search</button>
+      </div>
+      <div class="all">
+        <button class="iner4">
+          <i class="fa fa-user-large"></i>
+          <h2>Account</h2>
+          <i class="fa fa-angle-down"></i>
+        </button>
+        <button class="iner4">
+          <i class="fa-sharp fa-regular fa-circle-question"></i>
+          <h2>Help</h2>
+          <i class="fa fa-angle-down"></i>
+        </button>
+        <button onclick="catr(event)" class="iner5">
+          <i class="fa-sharp fa fa-cart-shopping"></i>
+          <h2>cart</h2>
+        </button>
+      </div>       
+
+    </div>
+    <div>
+      <div class="caro">
+        <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/electronics-product-ad-design-template-b5a71d302a50c749f199697319d3db2a_screen.jpg?ts=1640972757" class="im  w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+              <img src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/product-social-media-poster-design-template-985b84cec9b14e8f77223d9fe9a4fef9.jpg?ts=1622432196" class="im  w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+              <img src="../" class="d-block w-100" alt="...">
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div> 
+    </div>
+    <div id="bod">
+      <div id="body">
+
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>
+<script src="../bootstrap-5.3.0-alpha1-dist/js/bootstrap.bundle.js"></script>
+<script>
+  let cartarr = JSON.parse(localStorage.getItem("cart"))
+  console.log(cartarr);
+  let body = document.getElementById("body");
+  // fetch("https://fakestoreapi.com/products")
+  // .then(ron=> ron.json())
+  // .then(con=>{
+  fetch("https://dummyjson.com/products/add", {
+    method: "POST",
+    body: JSON.stringify(
+      {
+        brand: "Apple",
+        category: "smartphones",
+        description: "lorem ipsum dolor",
+        discountpercentage: 10.77,
+        id: 31,
+        images: [],
+        price: 457,
+        rating: 3.5,
+        stock: 5,
+        thumbsnail: "",
+        title: "iphone 9"
+
+      }
+    )
+  })
+  fetch("https://dummyjson.com/products")
+    .then(res => res.json())
+    .then(dat => {  
+      console.log(dat)
+      prodarr = dat.products
+      console.log(prodarr)
+      // prodarr.forEach(element => {
+      for (let index = 0; index < prodarr.length; index++) {
+        const element = prodarr[index];
+        body.innerHTML += `<div onclick="ad(${index})" class="contain">
+            <h1>${element.title}</h1>
+            <img class="in" src="${element.images[0]}" alt= "">
+              <h2>${element.description}</h2>
+              <p>₦${element.price}0</p>
+            <div class="rat">${element.rating}%</div>
+            <div><button id="ad" onclick="add(${index})">Add to cart</button></div>
+            <div id="show">
+              <img id="ini" src="" alt="">
+              <h1 id="h1"><h1>
+              <h2 id="h2"><h2> 
+              <p id="p"></p> 
+            </div>
+            </div>`
+      }
+    })
+  function ad(i) {
+    if (document.getElementById("show").style.display !== "none") {
+      document.getElementById("show").style.display = "none"
+    } else {
+      document.getElementById("show").style.display = "block"
+    }
+    console.log(prodarr[i].images[0])
+    // document.getElementById("show").innerHTML= `<div class="content">
+    //      <div class="ini"><img src="${prodarr[i].images[0]}" alt= ""></div>
+    //       <h1 class="h1">${prodarr[i].title}</h1>
+    //         <h2 class="h2">${prodarr[i].description}</h2>
+    //         <p class="p">₦${prodarr[i].price}0</p>
+    //       <button class="ad" onclick =addc()>add to cart</button>
+    //       </div>`  
+    document.getElementById("ini").src = prodarr[i].images[0]
+    document.getElementById("h1").innerHTML = prodarr[i].title
+    document.getElementById("h2").innerHTML = prodarr[i].description
+    document.getElementById("p").innerHTML = prodarr[i].price
+  }
+  let qu=1
+  function add(i) {
+    if (cartarr == null) {
+      let cartarr = []
+      cartarr.push({
+        product:prodarr[i],
+        qu:qu,
+        price:prodarr[i].price,
+        totalprice:qu*prodarr[i].price,
+      }
+      )
+      console.log(cartarr);
+      localStorage.setItem("cart", JSON.stringify(cartarr))
+      window.location.href = "cart.html"
+      alert('you have successfully added one item to cart')
+      console.log(cartarr)
+    } else {
+      cartarr.push({
+        product:prodarr[i],
+        qu:qu,
+        price:prodarr[i].price,
+        totalprice:qu*prodarr[i].price,
+      }
+      )
+      localStorage.setItem("cart", JSON.stringify(cartarr))
+      window.location.href = "cart.html"
+      console.log(cartarr)
+    }
+    // for (let index = 0; index < cartarr.length; index++) {
+    // const element = cartarr[index];
+    //     con.innerHTML += `<div class="contain">
+    //       <h1>${prodarr[i].title}</h1>
+    //       <img class="in" src="${prodarr[i].images[0]}" alt= "">
+    //         <h2>${prodarr[i].description}</h2>
+    //         <p>₦${prodarr[i].price}</p>
+    //       <div class="rat">${prodarr[i].rating}%</div>
+    //       <div><button>-</button><span>0</span><button>+</button></div>
+    //         </div>`
+
+  }
+  function catr(ev) {
+    ev.preventDefault();
+    window.location.href = "cart.html"
+    
+  }
+
+
+</script>
+<script src="../bootstrap-5.3.0-alpha1-dist/js/bootstrap.bundle.js"></script>
